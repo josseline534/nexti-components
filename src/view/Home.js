@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 //components
 import FormDynamic from "../component/FormDinamic/FormDynamic";
 import Button from "../component/Button/Button";
+import Alert from "../component/Alert/Alert";
 //formElement
 import formElement from "./formElement";
 
@@ -23,6 +24,32 @@ function Home() {
     return (
         <div className='container mt-3'>
             <div className='row g-3'>
+                <div className='col-md-4 offset-md-4'>
+                    <Alert
+                        typeAlert={"info"}
+                        message={
+                            "Problemas con el servidor en estos momentos intenta tu proceso en unos minutos."
+                        }
+                    />
+                    <Alert
+                        typeAlert={"success"}
+                        message={
+                            "Problemas con el servidor en estos momentos intenta tu proceso en unos minutos."
+                        }
+                    />
+                    <Alert
+                        typeAlert={"warning"}
+                        message={
+                            "Problemas con el servidor en estos momentos intenta tu proceso en unos minutos."
+                        }
+                    />
+                    <Alert
+                        typeAlert={"danger"}
+                        message={
+                            "Problemas con el servidor en estos momentos intenta tu proceso en unos minutos."
+                        }
+                    />
+                </div>
                 <div className='col-md-4 offset-md-4'>
                     <FormDynamic formElement={elements} />
                 </div>
