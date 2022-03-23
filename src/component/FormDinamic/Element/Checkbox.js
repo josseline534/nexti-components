@@ -3,16 +3,25 @@ import React, { useContext } from "react";
 import { FormContext } from "../Hooks/FormContext";
 //estilos
 import "./elements.css";
-function Checkbox({ field_id, field_label, field_value }) {
-    const { handleChange } = useContext(FormContext);
+function Checkbox({
+    field_id,
+    field_label,
+    field_value,
+    handleBlur,
+    handleChange,
+    values,
+}) {
+    /* const { handleChange } = useContext(FormContext); */
     return (
         <div className='mb-3 form-check'>
             <input
                 type='checkbox'
                 className='form-check-input p-2'
                 id={field_id}
-                onChange={(event) => handleChange(field_id, event)}
-                checked={field_value}
+                name={field_id}
+                onChange={handleChange}
+                checked={values[field_value]}
+                onBlur={handleBlur}
             />
             <label className='form-check-label labelInput' htmlFor={field_id}>
                 {field_label}

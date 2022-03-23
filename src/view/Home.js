@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 //components
 import FormDynamic from "../component/FormDinamic/FormDynamic";
-import Button from "../component/Button/Button";
 import Alert from "../component/Alert/Alert";
 //formElement
 import formElement from "./formElement";
@@ -21,10 +20,14 @@ function Home() {
         event.preventDefault();
         console.log(elements);
     };
+
     return (
         <div className='container mt-3'>
             <div className='row g-3'>
-                <div className='col-md-4 offset-md-4'>
+                <div
+                    hidden={true}
+                    className='col-md-8 offset-md-2 col-lg-4 offset-lg-4'
+                >
                     <Alert
                         typeAlert={"info"}
                         message={
@@ -50,14 +53,10 @@ function Home() {
                         }
                     />
                 </div>
-                <div className='col-md-4 offset-md-4'>
-                    <FormDynamic formElement={elements} />
-                </div>
-                <div className='col-md-4 offset-md-4 '>
-                    <Button
-                        text={"Continuar"}
-                        styles={myStyle}
-                        action={(event) => handleSubmit(event)}
+                <div className='col-md-8 offset-md-2 col-lg-4 offset-lg-4'>
+                    <FormDynamic
+                        formElement={elements}
+                        actionForm={handleSubmit}
                     />
                 </div>
             </div>

@@ -8,8 +8,11 @@ function Input({
     field_placeholder,
     field_value,
     field_help,
+    values,
+    handleBlur,
+    handleChange,
 }) {
-    const { handleChange } = useContext(FormContext);
+    /* const { handleChange } = useContext(FormContext); */
     return (
         <div className='mb-3'>
             <label htmlFor={field_id} className='form-label labelInput'>
@@ -19,10 +22,12 @@ function Input({
                 type='text'
                 className='form-control p-2'
                 id={field_id}
+                name={field_id}
                 aria-describedby='emailHelp'
                 placeholder={field_placeholder}
-                value={field_value}
-                onChange={(event) => handleChange(field_id, event)}
+                value={values[field_value]}
+                onChange={handleChange}
+                onBlur={handleBlur}
             />
             <div id={field_id} className='form-text text-success labelInput'>
                 {field_help}

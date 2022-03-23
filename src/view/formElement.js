@@ -60,9 +60,16 @@ const formElement = [
                 field_label:
                     "Autorizo a Cooperativa Daule a verificar mi información",
                 field_type: "checkbox",
-                field_value: "checked",
+                field_value: false,
             },
         ],
+        initialValues: {
+            email: "",
+            emailConfirm: "",
+            identificate: "",
+            fingerprintCode: "",
+            authorization: false,
+        },
     },
 ];
 
