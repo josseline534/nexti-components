@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { FormContext } from "./Hooks/FormContext";
-import { Formik } from "formik";
+import { useForm } from "react-hook-form";
 //components
 import Element from "./Element";
 import Button from "../Button/Button";
+//hooks
+import { FormContext } from "./Hooks/FormContext";
+//estilos
+import "./formDynamic.css";
 
-function FormDynamic({ formElement }) {
+function FormDynamic({ formElement, handleSubmitForm, handleChange }) {
     const [elements, setElements] = useState(formElement);
+
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm();
 
     const myStyle = {
         background: "#22D16B",
@@ -17,52 +27,49 @@ function FormDynamic({ formElement }) {
         setElements(formElement);
     }, [formElement]);
 
-    const { fields, page_label } = elements;
-
-    const handleChange = (id, event) => {
-        const newElements = { ...elements };
-        newElements.fields.forEach((field) => {
-            if (id === field.field_id) {
-                if (field.field_type === "checkbox")
-                    field.field_value = event.target.checked;
-                else field.field_value = event.target.value;
-            }
-            setElements(newElements);
-        });
-    };
-
     return (
         <FormContext.Provider value={{ handleChange }}>
-            <div>
-                <p className='h6'>{page_label}</p>
-                <Formik
-                    initialValues={formElement.initialValues}
-                    onSubmit={(valores) =>
-                        console.log("Formulario Enviado", valores)
-                    }
-                >
-                    {({ handleSubmit, handleBlur, values, handleChange }) => (
-                        <form onSubmit={handleSubmit}>
-                            {fields
-                                ? fields.map((field, i) => (
-                                      <Element
-                                          key={i}
-                                          field={field}
-                                          values={values}
-                                          handleChange={handleChange}
-                                          handleBlur={handleBlur}
-                                      />
-                                  ))
-                                : null}
-                            <Button
-                                typeButton={"submit"}
-                                text={"Continuar"}
-                                styles={myStyle}
-                                action={() => {}}
-                            />
-                        </form>
-                    )}
-                </Formik>
+            <div className='containerForm'>
+                {elements
+                    ? elements.map(({ page_label, fields }, index) => (
+                          <div key={index}>
+                              <p className='h6 pt-4 ps-4 pageLabel'>
+                                  {page_label}
+                              </p>
+                              <form
+                                  /* onSubmit={handleSubmit(handleSubmitForm)} */
+                                  className='row g-2 p-4'
+                              >
+                                  {fields
+                                      ? fields.map((field, i) => (
+                                            <div
+                                                key={i}
+                                                className={field.field_width}
+                                            >
+                                                <Element
+                                                    field={field}
+                                                    register={register}
+                                                    section={index}
+                                                />
+                                            </div>
+                                        ))
+                                      : null}
+                                  {index === elements.length - 1 ? (
+                                      <div className='col-md-4 offset-md-8 p-4'>
+                                          <Button
+                                              typeButton={"submit"}
+                                              text={"Continuar"}
+                                              styles={myStyle}
+                                              action={(event) =>
+                                                  handleSubmit(event)
+                                              }
+                                          />
+                                      </div>
+                                  ) : null}
+                              </form>
+                          </div>
+                      ))
+                    : null}
             </div>
         </FormContext.Provider>
     );

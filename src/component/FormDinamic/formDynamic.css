@@ -1,0 +1,10 @@
+.containerForm {
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+.pageLabel {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 21px;
+}

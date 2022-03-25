@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Select, Checkbox, Email } from "./Element/index";
+import { Input, Select, Checkbox, Email, Number, Radio } from "./Element/index";
 function Element({
     field: {
         field_type,
@@ -9,59 +9,73 @@ function Element({
         field_value,
         field_options,
         field_help,
+        field_required,
     },
-    handleChange,
-    handleBlur,
-    values,
+    register,
+    section,
 }) {
     switch (field_type) {
         case "email":
             return (
                 <Email
-                    handleChange={handleChange}
-                    values={values}
+                    field_required={field_required}
                     field_id={field_id}
                     field_label={field_label}
                     field_placeholder={field_placeholder}
                     field_value={field_value}
                     field_help={field_help}
-                    handleBlur={handleBlur}
+                    register={register}
+                    section={section}
                 />
             );
         case "text":
             return (
                 <Input
-                    handleChange={handleChange}
-                    values={values}
+                    field_required={field_required}
                     field_id={field_id}
                     field_label={field_label}
                     field_placeholder={field_placeholder}
                     field_value={field_value}
                     field_help={field_help}
-                    handleBlur={handleBlur}
+                    register={register}
+                    section={section}
+                />
+            );
+        case "number":
+            return (
+                <Number
+                    field_id={field_id}
+                    field_label={field_label}
+                    field_placeholder={field_placeholder}
+                    field_value={field_value}
+                    field_help={field_help}
                 />
             );
         case "select":
             return (
                 <Select
-                    handleChange={handleChange}
-                    values={values}
                     field_id={field_id}
                     field_label={field_label}
                     field_value={field_value}
                     field_options={field_options}
-                    handleBlur={handleBlur}
                 />
             );
         case "checkbox":
             return (
                 <Checkbox
-                    handleChange={handleChange}
-                    values={values}
                     field_id={field_id}
                     field_label={field_label}
                     field_value={field_value}
-                    handleBlur={handleBlur}
+                    section={section}
+                />
+            );
+        case "radio":
+            return (
+                <Radio
+                    field_id={field_id}
+                    field_label={field_label}
+                    field_options={field_options}
+                    section={section}
                 />
             );
         default:
